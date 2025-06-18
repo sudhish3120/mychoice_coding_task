@@ -6,13 +6,10 @@ import {
   HStack,
   Text,
   Button,
-  Badge,
-  useColorModeValue
+  Badge
 } from '@chakra-ui/react';
 
 const ItemDetails = ({ selectedItem }) => {
-  const bgColor = useColorModeValue('gray.50', 'gray.700');
-  const borderColor = useColorModeValue('gray.200', 'gray.600');
 
   if (!selectedItem) {
     return (
@@ -36,9 +33,8 @@ const ItemDetails = ({ selectedItem }) => {
       </Heading>
       
       <Box
-        bg={bgColor}
         border="1px solid"
-        borderColor={borderColor}
+        borderColor="gray.200"
         borderRadius="lg"
         p={6}
       >
@@ -84,4 +80,4 @@ const ItemDetails = ({ selectedItem }) => {
   );
 };
 
-export default ItemDetails; 
+export default ItemDetails;

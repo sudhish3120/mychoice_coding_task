@@ -1,4 +1,5 @@
 import React from 'react';
+import { MdEdit, MdDelete } from 'react-icons/md';
 import {
   Box,
   Heading,
@@ -6,18 +7,11 @@ import {
   HStack,
   Text,
   IconButton,
-  useColorModeValue,
   Badge,
   Flex
 } from '@chakra-ui/react';
-import { EditIcon, DeleteIcon } from '@chakra-ui/icons';
 
 const ItemList = ({ items, selectedItem, onItemSelect, onEdit, onDelete }) => {
-  const bgColor = useColorModeValue('gray.50', 'gray.700');
-  const selectedBgColor = useColorModeValue('blue.50', 'blue.900');
-  const borderColor = useColorModeValue('gray.200', 'gray.600');
-  const selectedBorderColor = useColorModeValue('blue.200', 'blue.400');
-
   const handleEditClick = (e, item) => {
     e.stopPropagation();
     onEdit(item);
@@ -44,14 +38,14 @@ const ItemList = ({ items, selectedItem, onItemSelect, onEdit, onDelete }) => {
             <Box
               key={item.id}
               p={4}
-              bg={selectedItem?.id === item.id ? selectedBgColor : bgColor}
+              bg={selectedItem?.id === item.id ? 'blue.50' : 'gray.50'}
               border="1px solid"
-              borderColor={selectedItem?.id === item.id ? selectedBorderColor : borderColor}
+              borderColor={selectedItem?.id === item.id ? 'blue.200' : 'gray.200'}
               borderRadius="md"
               cursor="pointer"
               transition="all 0.2s"
               _hover={{
-                bg: selectedItem?.id === item.id ? selectedBgColor : 'gray.100',
+                bg: selectedItem?.id === item.id ? 'blue.50' : 'gray.100',
                 borderColor: 'gray.300'
               }}
               onClick={() => onItemSelect(item)}
@@ -67,23 +61,27 @@ const ItemList = ({ items, selectedItem, onItemSelect, onEdit, onDelete }) => {
                   </Badge>
                 </Box>
                 
-                <HStack spacing={2} opacity={0} _groupHover={{ opacity: 1 }}>
+                <HStack spacing={2}>
                   <IconButton
-                    icon={<EditIcon />}
+                    icon={null}
                     size="sm"
                     variant="ghost"
                     colorScheme="blue"
                     onClick={(e) => handleEditClick(e, item)}
                     aria-label="Edit item"
-                  />
+                  >
+                    Edit
+                  </IconButton>
                   <IconButton
-                    icon={<DeleteIcon />}
+                    icon={null}
                     size="sm"
                     variant="ghost"
                     colorScheme="red"
                     onClick={(e) => handleDeleteClick(e, item)}
                     aria-label="Delete item"
-                  />
+                  >
+                    Delete
+                  </IconButton>
                 </HStack>
               </Flex>
             </Box>
@@ -94,4 +92,4 @@ const ItemList = ({ items, selectedItem, onItemSelect, onEdit, onDelete }) => {
   );
 };
 
-export default ItemList; 
+export default ItemList;

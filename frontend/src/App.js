@@ -1,15 +1,17 @@
 import React, { useEffect, useState } from 'react';
-import { ChakraProvider, Box, Container, Heading, Alert, Flex, Button } from '@chakra-ui/react';
-import { AlertIcon } from '@chakra-ui/icons';
-import { AddIcon } from '@chakra-ui/icons';
+import { ChakraProvider, defaultSystem, Box, Container, Heading, Alert, Flex, Button } from '@chakra-ui/react';
+import { MdAdd } from 'react-icons/md';
 import ItemList from './components/ItemList';
 import ItemDetails from './components/ItemDetails';
-import ItemModal from './components/ItemModal';
-import ConfirmModal from './components/ConfirmModal';
+import ItemModal from './components/ItemDialog';
+import ConfirmDialog from './components/ConfirmDialog';
+
 
 const API_URL = 'http://127.0.0.1:8000/items/';
 
+
 function App() {
+  
   const [items, setItems] = useState([]);
   const [selectedItem, setSelectedItem] = useState(null);
   const [error, setError] = useState('');
@@ -131,7 +133,7 @@ function App() {
   };
 
   return (
-    <ChakraProvider>
+    <ChakraProvider value={defaultSystem}>
       <Container maxW="1200px" py={8}>
         <Box textAlign="center" mb={8}>
           <Flex justify="space-between" align="center" mb={4}>
@@ -139,7 +141,7 @@ function App() {
               Item Manager
             </Heading>
             <Button
-              leftIcon={<AddIcon />}
+              leftIcon={<MdAdd />}
               colorScheme="green"
               size="lg"
               onClick={handleCreateClick}
@@ -148,10 +150,20 @@ function App() {
             </Button>
           </Flex>
           {error && (
-            <Alert status="error" borderRadius="md">
-              <AlertIcon />
+            <Box
+              bg="red.50"
+              color="red.800"
+              border="1px solid"
+              borderColor="red.200"
+              borderRadius="md"
+              px={4}
+              py={3}
+              mb={4}
+              fontWeight="semibold"
+              textAlign="center"
+            >
               {error}
-            </Alert>
+            </Box>
           )}
         </Box>
         
@@ -178,7 +190,7 @@ function App() {
           mode={modalMode}
         />
 
-        <ConfirmModal
+        <ConfirmDialog
           isOpen={isConfirmOpen}
           onClose={handleConfirmClose}
           onConfirm={handleDeleteConfirm}
