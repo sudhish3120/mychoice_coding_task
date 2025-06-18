@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { ChakraProvider, defaultSystem, Box, Container, Heading, Alert, Flex, Button } from '@chakra-ui/react';
+import { ChakraProvider, defaultSystem, Box, Container, Heading, Flex, Button } from '@chakra-ui/react';
 import { MdAdd } from 'react-icons/md';
 import ItemList from './components/ItemList';
 import ItemDetails from './components/ItemDetails';
